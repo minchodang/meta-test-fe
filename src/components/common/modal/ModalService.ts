@@ -45,6 +45,12 @@ export class ModalService {
         this.subscribers.forEach((callback) => callback(newState));
     }
 
+    closeEntireModal() {
+        const newState = { isOpen: false, contents: [] };
+        this.currentState = newState;
+        this.subscribers.forEach((callback) => callback(newState));
+    }
+
     // 현재 모달의 열림 상태 확인
     isModalOpen(): boolean {
         return this.currentState.isOpen;

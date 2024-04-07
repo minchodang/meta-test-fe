@@ -34,7 +34,7 @@ const Toast = () => {
     }, [messages.length]);
 
     return (
-        <div className="fixed bottom-10 left-1/2 flex -translate-x-1/2 transform flex-col gap-3">
+        <div className="fixed bottom-10 left-1/2 z-50 flex -translate-x-1/2 transform flex-col gap-3">
             {messages.map((toast) => (
                 <ToastMessage message={toast.message} key={toast.id} />
             ))}

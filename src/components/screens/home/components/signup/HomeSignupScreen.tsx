@@ -1,6 +1,9 @@
 import { FC } from 'react';
 import { postSignup } from '@src/api/postSingup';
+import { ModalService } from '@src/components/common/modal/ModalService';
+import { ToastService } from '@src/components/common/toast/ToastService';
 import { useMutation } from '@tanstack/react-query';
+import { isAxiosError } from 'axios';
 import { FormProvider, useForm } from 'react-hook-form';
 import HomeSignupButton from './HomeSignupButton';
 import HomeSignupPassword from './HomeSignupPassword';
@@ -16,6 +19,9 @@ export interface HomeSignupFormValue {
 }
 
 const HomeSignupScreen: FC<HomeSignupScreenProps> = () => {
+    const toastService = ToastService.getInstance();
+    const modalService = ModalService.getInstance();
+
     const methods = useForm<HomeSignupFormValue>({
         defaultValues: {
             email: '',
@@ -32,8 +38,16 @@ const HomeSignupScreen: FC<HomeSignupScreenProps> = () => {
         submitSignupForm.mutate(
             { email, password },
             {
-                onSuccess: () => {
-                    console.log('성공!');
+                onSuccess: async () => {
+                    await toastService.addToast('가입이 완료되었습니다.');
+                    await modalService.closeEntireModal();
+                },
+                onError: (data) => {
+                    if (isAxiosError(data)) {
+                        toastService.addToast(data.response?.data.message);
+                        return;
+                    }
+                    toastService.addToast(data.message);
                 },
             },
         );

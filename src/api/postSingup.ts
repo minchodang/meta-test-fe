@@ -11,6 +11,6 @@ interface PostSignupBody {
 }
 
 export const postSignup = async (body: PostSignupBody) => {
-    const { data } = await defaultRequest.post<PostSignupResponse>('/users', { body });
+    const { data } = await defaultRequest.post<PostSignupResponse>('/users', { ...body });
     return data;
 };
