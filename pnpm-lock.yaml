@@ -5,9 +5,6 @@ settings:
     excludeLinksFromLockfile: false
 
 dependencies:
-    '@faker-js/faker':
-        specifier: ^8.4.1
-        version: 8.4.1
     '@hookform/error-message':
         specifier: ^2.0.1
         version: 2.0.1(react-dom@18.2.0)(react-hook-form@7.51.0)(react@18.2.0)
@@ -23,12 +20,9 @@ dependencies:
     axios:
         specifier: ^1.6.7
         version: 1.6.7
-    chart.js:
-        specifier: ^4.4.2
-        version: 4.4.2
-    cookies-next:
-        specifier: ^4.1.1
-        version: 4.1.1
+    dayjs:
+        specifier: ^1.11.11
+        version: 1.11.11
     next:
         specifier: 13.5.6
         version: 13.5.6(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)
@@ -38,9 +32,9 @@ dependencies:
     react:
         specifier: ^18
         version: 18.2.0
-    react-chartjs-2:
-        specifier: ^5.2.0
-        version: 5.2.0(chart.js@4.4.2)(react@18.2.0)
+    react-cookie:
+        specifier: ^7.1.4
+        version: 7.1.4(react@18.2.0)
     react-dom:
         specifier: ^18
         version: 18.2.0(react@18.2.0)
@@ -685,14 +679,6 @@ packages:
             }
         engines: { node: ^12.22.0 || ^14.17.0 || >=16.0.0 }
         dev: true
-
-    /@faker-js/faker@8.4.1:
-        resolution:
-            {
-                integrity: sha512-XQ3cU+Q8Uqmrbf2e0cIC/QN43sTBSC8KF12u29Mb47tWrt2hAgBXSgpZMj4Ao8Uk0iJcU99QsOCaIL8934obCg==,
-            }
-        engines: { node: ^14.17.0 || ^16.13.0 || >=18.0.0, npm: '>=6.14.13' }
-        dev: false
 
     /@formatjs/ecma402-abstract@1.11.4:
         resolution:
@@ -1477,13 +1463,6 @@ packages:
             '@jridgewell/resolve-uri': 3.1.1
             '@jridgewell/sourcemap-codec': 1.4.15
 
-    /@kurkle/color@0.3.2:
-        resolution:
-            {
-                integrity: sha512-fuscdXJ9G1qb7W8VdHi+IwRqij3lBkosAm4ydQtEmbY58OzHXqQhvlxqEkoz0yssNVn38bcpRWgA9PP+OGoisw==,
-            }
-        dev: false
-
     /@next/env@13.5.6:
         resolution:
             {
@@ -2003,6 +1982,16 @@ packages:
             '@types/node': 20.11.16
         dev: true
 
+    /@types/hoist-non-react-statics@3.3.5:
+        resolution:
+            {
+                integrity: sha512-SbcrWzkKBw2cdwRTwQAswfpB9g9LJWfjtUeW/jvNwbhC8cpmmNYVePa+ncbUe0rGTQ7G3Ff6mYUN2VMfLVr+Sg==,
+            }
+        dependencies:
+            '@types/react': 18.2.53
+            hoist-non-react-statics: 3.3.2
+        dev: false
+
     /@types/istanbul-lib-coverage@2.0.6:
         resolution:
             {
@@ -2062,13 +2051,6 @@ packages:
                 integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==,
             }
         dev: true
-
-    /@types/node@16.18.94:
-        resolution:
-            {
-                integrity: sha512-X8q3DoKq8t/QhA0Rk/9wJUajxtXRDiCK+cVaONKLxpsjPhu+xX6uZuEj4UKGLQ4p0obTdFxa0cP/BMvf9mOYZA==,
-            }
-        dev: false
 
     /@types/node@20.11.16:
         resolution:
@@ -3267,16 +3249,6 @@ packages:
         engines: { node: '>=10' }
         dev: true
 
-    /chart.js@4.4.2:
-        resolution:
-            {
-                integrity: sha512-6GD7iKwFpP5kbSD4MeRRRlTnQvxfQREy36uEtm1hzHzcOqwWx0YEHuspuoNlslu+nciLIB7fjjsHkUv/FzFcOg==,
-            }
-        engines: { pnpm: '>=8' }
-        dependencies:
-            '@kurkle/color': 0.3.2
-        dev: false
-
     /chokidar@3.6.0:
         resolution:
             {
@@ -3517,17 +3489,6 @@ packages:
         engines: { node: '>= 0.6' }
         dev: false
 
-    /cookies-next@4.1.1:
-        resolution:
-            {
-                integrity: sha512-20QaN0iQSz87Os0BhNg9M71eM++gylT3N5szTlhq2rK6QvXn1FYGPB4eAgU4qFTunbQKhD35zfQ95ZWgzUy3Cg==,
-            }
-        dependencies:
-            '@types/cookie': 0.6.0
-            '@types/node': 16.18.94
-            cookie: 0.6.0
-        dev: false
-
     /create-jest@29.7.0(@types/node@20.11.16):
         resolution:
             {
@@ -3730,6 +3691,13 @@ packages:
             whatwg-mimetype: 3.0.0
             whatwg-url: 11.0.0
         dev: true
+
+    /dayjs@1.11.11:
+        resolution:
+            {
+                integrity: sha512-okzr3f11N6WuqYtZSvm+F776mB41wRZMhKP+hc34YdW+KmtYYK9iqvHSwo2k9FEH3fhGXvOPV6yz2IcSrfRUDg==,
+            }
+        dev: false
 
     /debug@3.2.7:
         resolution:
@@ -5256,6 +5224,15 @@ packages:
         dependencies:
             function-bind: 1.1.2
         dev: true
+
+    /hoist-non-react-statics@3.3.2:
+        resolution:
+            {
+                integrity: sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==,
+            }
+        dependencies:
+            react-is: 16.13.1
+        dev: false
 
     /html-encoding-sniffer@3.0.0:
         resolution:
@@ -7713,17 +7690,18 @@ packages:
             safe-buffer: 5.2.1
         dev: true
 
-    /react-chartjs-2@5.2.0(chart.js@4.4.2)(react@18.2.0):
+    /react-cookie@7.1.4(react@18.2.0):
         resolution:
             {
-                integrity: sha512-98iN5aguJyVSxp5U3CblRLH67J8gkfyGNbiK3c+l1QI/G4irHMPQw44aEPmjVag+YKTyQ260NcF82GTQ3bdscA==,
+                integrity: sha512-wDxxa/HYaSXSMlyWJvJ5uZTzIVtQTPf1gMksFgwAz/2/W3lCtY8r4OChCXMPE7wax0PAdMY97UkNJedGv7KnDw==,
             }
         peerDependencies:
-            chart.js: ^4.1.1
-            react: ^16.8.0 || ^17.0.0 || ^18.0.0
+            react: '>= 16.3.0'
         dependencies:
-            chart.js: 4.4.2
+            '@types/hoist-non-react-statics': 3.3.5
+            hoist-non-react-statics: 3.3.2
             react: 18.2.0
+            universal-cookie: 7.1.4
         dev: false
 
     /react-dom@18.2.0(react@18.2.0):
@@ -9049,6 +9027,16 @@ packages:
                 integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==,
             }
         dev: true
+
+    /universal-cookie@7.1.4:
+        resolution:
+            {
+                integrity: sha512-Q+DVJsdykStWRMtXr2Pdj3EF98qZHUH/fXv/gwFz/unyToy1Ek1w5GsWt53Pf38tT8Gbcy5QNsj61Xe9TggP4g==,
+            }
+        dependencies:
+            '@types/cookie': 0.6.0
+            cookie: 0.6.0
+        dev: false
 
     /universalify@0.2.0:
         resolution:

@@ -1,6 +1,7 @@
-import { FC, useCallback, useEffect } from 'react';
+'use client';
+
+import { FC, useCallback } from 'react';
 import CommonInput from '@src/components/common/CommonInput';
-import { QuizListService } from '@src/service/QuizListService';
 import { FormProvider, useForm } from 'react-hook-form';
 import QuizAnswerSortingButtonSection from './QuizAnswerSortingButtonSection';
 import QuizAnswerSubmitButton from './QuizAnswerSubmitButton';

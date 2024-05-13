@@ -10,13 +10,14 @@
 }
 
 .box {
-    width: 700px;
+    width: 590px;
     height: 300px;
 }
 .colLarge {
     width: 100%;
-    max-width: 768px;
-    overflow-x: scroll;
+    border: 1px solid red;
+    max-width: 590px;
+    overflow: auto;
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* IE 10+ */
 }

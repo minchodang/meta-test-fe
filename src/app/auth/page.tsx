@@ -1,9 +1,9 @@
 'use client';
 
-import useLogin from '@src/hooks/useLogin';
+import useSocialLogin from '@src/hooks/useSocialLogin';
 
 const AuthPage = () => {
-    useLogin();
+    useSocialLogin();
     return <div />;
 };
 

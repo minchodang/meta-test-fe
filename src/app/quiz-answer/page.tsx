@@ -1,5 +1,3 @@
-'use client';
-
 import { QuizAnswerForm } from '@src/components/screens/quiz-answer/QuizAnswerForm';
 
 const QuizAnswerPage = () => (

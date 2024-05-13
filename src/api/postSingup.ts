@@ -1,5 +1,4 @@
 import defaultRequest from '@src/lib/axios/defaultRequest';
-import { PostSignupResponse } from '@src/types/api/Signs';
 
 interface PostSignupBody {
     Id?: string;
@@ -11,6 +10,6 @@ interface PostSignupBody {
 }
 
 export const postSignup = async (body: PostSignupBody) => {
-    const { data } = await defaultRequest.post<PostSignupResponse>('/users', { ...body });
+    const { data } = await defaultRequest.post('/users', { ...body });
     return data;
 };

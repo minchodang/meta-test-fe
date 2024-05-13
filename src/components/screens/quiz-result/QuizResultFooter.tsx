@@ -1,3 +1,5 @@
+'use client';
+
 import { FC } from 'react';
 import RefreshIcon from '@src/components/common/Icons/RefreshIcon';
 import ShareIcon from '@src/components/common/Icons/ShareIcon';

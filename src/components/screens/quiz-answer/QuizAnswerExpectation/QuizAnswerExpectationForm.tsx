@@ -1,10 +1,10 @@
 import { FC, useMemo } from 'react';
-import { postTestSubmit } from '@src/api/postTestSubmit';
+import { API_GET_USER_PROFILE, getUserProfile } from '@src/api/getUserProfile';
+import { postTestResult } from '@src/api/postTestResult';
 import Button from '@src/components/common/Button';
 import { ModalService } from '@src/service/ModalService';
 import { QuizListService } from '@src/service/QuizListService';
-import { QuizDifficulty } from '@src/types/api/tests';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { FormProvider, useForm } from 'react-hook-form';
 import QuizAnswerExpectationInput from './QuizAnswerExpectationInput';
@@ -31,11 +31,15 @@ const getQuizLevel = (array: string[]) => {
 };
 
 const QuizAnswerExpectationForm: FC<QuizAnswerExpectationFormProps> = ({ answers }) => {
-    const { push } = useRouter();
+    const { replace } = useRouter();
+    const { data: userProfile } = useQuery({
+        queryKey: [API_GET_USER_PROFILE],
+        queryFn: () => getUserProfile(),
+    });
     const modalService = ModalService.getInstance();
     const quizService = QuizListService.getInstance();
     const testSubmit = useMutation({
-        mutationFn: postTestSubmit,
+        mutationFn: postTestResult,
     });
 
     const onClickCloseButton = () => {
@@ -52,6 +56,7 @@ const QuizAnswerExpectationForm: FC<QuizAnswerExpectationFormProps> = ({ answers
     const onValid = ({ expectationNumber }: QuizAnswerExpectationPopupFormValue) => {
         testSubmit.mutate(
             {
+                id: userProfile?.id,
                 level: getQuizLevel(quizService.getQuizList().flatMap((quiz) => quiz.word)),
                 total_count: quizService.getQuizList().length,
                 expected_count: Number(expectationNumber),
@@ -59,8 +64,9 @@ const QuizAnswerExpectationForm: FC<QuizAnswerExpectationFormProps> = ({ answers
                 input_words: answers,
             },
             {
-                onSuccess: (data) => {
-                    push(`/quiz-result?id=${data.id}`);
+                onSuccess: async (data) => {
+                    await modalService.closeEntireModal();
+                    replace(`/quiz-result?id=${data.id}&sort_key=${data.sort_key}`);
                 },
             },
         );

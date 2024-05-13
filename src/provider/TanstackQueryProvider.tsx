@@ -13,7 +13,6 @@ const TanstackQueryProvider: FC<PropsWithChildren<TanstackQueryProviderProps>> =
             new QueryClient({
                 defaultOptions: {
                     queries: {
-                        retry: false,
                         staleTime: 60 * 3 * 1000,
                     },
                 },

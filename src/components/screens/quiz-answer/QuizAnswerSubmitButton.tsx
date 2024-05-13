@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { postTestSubmit } from '@src/api/postTestSubmit';
 import Button from '@src/components/common/Button';
 import Modal from '@src/components/common/modal/Modal';
 import { ModalService } from '@src/service/ModalService';
@@ -20,14 +19,16 @@ const QuizAnswerSubmitButton: FC<QuizAnswerSubmitButtonProps> = () => {
     };
 
     return (
-        <Button
-            variant="primary"
-            type="button"
-            disabled={answers.length === 0}
-            onClick={onClickSubmitButton}
-        >
-            제출하기
-        </Button>
+        <div className="h-10 w-full">
+            <Button
+                variant="primary"
+                type="button"
+                disabled={answers.length === 0}
+                onClick={onClickSubmitButton}
+            >
+                제출하기
+            </Button>
+        </div>
     );
 };
 

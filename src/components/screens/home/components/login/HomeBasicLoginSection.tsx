@@ -1,14 +1,13 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { postLogin } from '@src/api/postLogin';
 import Button from '@src/components/common/Button';
-import CommonInput from '@src/components/common/CommonInput';
 import Modal from '@src/components/common/modal/Modal';
 import defaultRequest from '@src/lib/axios/defaultRequest';
 import { ModalService } from '@src/service/ModalService';
 import { ToastService } from '@src/service/ToastService';
 import { useMutation } from '@tanstack/react-query';
 import { isAxiosError } from 'axios';
-import { setCookie } from 'cookies-next';
+import { useCookies } from 'react-cookie';
 import { FormProvider, useForm } from 'react-hook-form';
 import HomeBasicLoginEmailInput from './HomeBasicLoginEmailInput';
 import HomeBasicLoginPasswordInput from './HomeBasicLoginPasswordInput';
@@ -16,16 +15,13 @@ import HomeBasicLoginSubmitButton from './HomeBasicLoginSubmitButton';
 import HomePasswordFindScreen from '../password-find/HomePasswordFindScreen';
 import HomeSignupScreen from '../signup/HomeSignupScreen';
 
-interface HomeBasicLoginSectionProps {
-    onSuccessLogin: VoidFunction;
-}
-
 export interface HomeBasicLoginFormValue {
     email: string;
     password: string;
 }
 
-const HomeBasicLoginSection: FC<HomeBasicLoginSectionProps> = ({ onSuccessLogin }) => {
+const HomeBasicLoginSection: FC = () => {
+    const [, setCookie] = useCookies(['refreshToken']);
     const modalService = ModalService.getInstance();
     const toastService = ToastService.getInstance();
     const login = useMutation({
@@ -36,13 +32,13 @@ const HomeBasicLoginSection: FC<HomeBasicLoginSectionProps> = ({ onSuccessLogin 
                 const refreshToken = data.headers.refresh_token;
                 defaultRequest.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
                 await setCookie('refreshToken', refreshToken);
-                await onSuccessLogin();
+                toastService.addToast('로그인 되었습니다.');
                 modalService.closeEntireModal();
             }
         },
         onError: (data) => {
             if (isAxiosError(data)) {
-                toastService.addToast(data.response?.data.message);
+                toastService.addToast('가입자 정보가 일치하지 않습니다.');
                 return;
             }
             toastService.addToast(data.message);
@@ -69,7 +65,7 @@ const HomeBasicLoginSection: FC<HomeBasicLoginSectionProps> = ({ onSuccessLogin 
     const onClickSignup = () => {
         modalService.openModal(
             <Modal onClose={onCloseModal}>
-                <HomeSignupScreen onSuccessLogin={onSuccessLogin} />
+                <HomeSignupScreen />
             </Modal>,
         );
     };

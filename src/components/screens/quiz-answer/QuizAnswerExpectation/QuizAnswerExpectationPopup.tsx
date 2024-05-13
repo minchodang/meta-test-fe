@@ -15,7 +15,7 @@ interface QuizAnswerExpectationPopupProps {
 
 const QuizAnswerExpectationPopup: FC<QuizAnswerExpectationPopupProps> = ({ answers }) => (
     <div
-        className="container flex
+        className="flex
 w-96
 flex-col
 gap-y-5 

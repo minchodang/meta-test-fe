@@ -1,28 +1,40 @@
-import { useEffect, useLayoutEffect, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 import { API_GET_GOOGLE_LOGIN, getGoogleLogin } from '@src/api/getGoogleLogin';
 import { API_GET_KAKAKO_LOGIN, getKakaoLogin } from '@src/api/getKakaoLogin';
 import defaultRequest from '@src/lib/axios/defaultRequest';
+import { ToastService } from '@src/service/ToastService';
 import { useQuery } from '@tanstack/react-query';
-import { getCookie, setCookie } from 'cookies-next';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { useCookies } from 'react-cookie';
 
-const useLogin = () => {
-    const [isLogin, setIsLogin] = useState(false);
-    const { replace } = useRouter();
+export type SocialType = 'google' | 'kakao';
+export interface SocialLoginInformationType {
+    loginPath: string;
+    socialType: SocialType;
+}
+
+const useSocialLogin = () => {
+    const [getCookie, setCookie] = useCookies(['social-login-info', 'refreshToken']);
+    const { push } = useRouter();
     const { get } = useSearchParams();
-    const token = getCookie('refreshToken');
+    const toastService = ToastService.getInstance();
     const code = get('code');
-    const prevPathname = getCookie('prev-login')?.toString();
+    const socialInfo = getCookie['social-login-info'];
+
+    const socialInfoObj: SocialLoginInformationType = useMemo(() => {
+        if (socialInfo) return socialInfo;
+        return null;
+    }, [socialInfo]);
 
     const googleLogin = useQuery({
         queryFn: () => getGoogleLogin({ code: String(code) }),
         queryKey: [API_GET_GOOGLE_LOGIN],
-        enabled: !!code,
+        enabled: !!code && socialInfoObj?.socialType === 'google',
     });
     const kakaoLogin = useQuery({
         queryFn: () => getKakaoLogin({ code: String(code) }),
         queryKey: [API_GET_KAKAKO_LOGIN],
-        enabled: !!code,
+        enabled: !!code && socialInfoObj?.socialType === 'kakao',
     });
 
     useEffect(() => {
@@ -32,12 +44,12 @@ const useLogin = () => {
                 const refreshToken = kakaoLogin.data.headers.refresh_token;
                 defaultRequest.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
                 await setCookie('refreshToken', refreshToken);
-                await setIsLogin(true);
-                replace(prevPathname ?? '/');
+                toastService.addToast('로그인 되었습니다.');
+                push(socialInfoObj.loginPath ?? '/');
             }
         }
         kakaoLoginProcess();
-    }, [kakaoLogin.data, prevPathname, replace]);
+    }, [kakaoLogin.data, push, setCookie, socialInfoObj?.loginPath, toastService]);
     useEffect(() => {
         async function googleLoginProcess() {
             if (googleLogin.data) {
@@ -45,21 +57,12 @@ const useLogin = () => {
                 const refreshToken = googleLogin.data.headers.refresh_token;
                 defaultRequest.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
                 await setCookie('refreshToken', refreshToken);
-                await setIsLogin(true);
-                replace(prevPathname ?? '/');
+                toastService.addToast('로그인 되었습니다.');
+                push(socialInfoObj.loginPath ?? '/');
             }
         }
         googleLoginProcess();
-    }, [googleLogin.data, prevPathname, replace]);
-
-    useLayoutEffect(() => {
-        setIsLogin(!!token);
-    }, [token]);
-
-    return {
-        isLogin,
-        setIsLogin,
-    };
+    }, [googleLogin.data, push, setCookie, socialInfoObj?.loginPath, toastService]);
 };
 
-export default useLogin;
+export default useSocialLogin;

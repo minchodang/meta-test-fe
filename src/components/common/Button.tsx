@@ -44,7 +44,8 @@ const Button = ({
     return (
         <button
             type={type}
-            className={`font 
+            className={`
+            h-full
             w-full
             cursor-pointer
             rounded-md border-none px-4 py-2 disabled:cursor-not-allowed text-${size} ${variantClasses} ${classes}`}
