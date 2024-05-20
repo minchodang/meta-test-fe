@@ -8,7 +8,7 @@ export interface GetUserTestDetailParameter {
     sort_key: string;
 }
 
-export const API_GET_USER_TEST_DETAIL = `/users/test/detail/{{id}}`;
+export const API_GET_USER_TEST_DETAIL = `/users/test/{{id}}`;
 
 export const getUserTestDetail: ApiHandler<
     GetUserTestResponse,
