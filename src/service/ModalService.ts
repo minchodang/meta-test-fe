@@ -9,6 +9,7 @@ export class ModalService {
     static instance: ModalService;
 
     private currentState: ModalState = { isOpen: false, contents: [] };
+    private constructor() {};
 
     subscribers: ((state: ModalState) => void)[] = [];
 
@@ -28,31 +29,41 @@ export class ModalService {
     }
 
     openModal(modalContent: ReactNode, backGroundColor?: string) {
-        const newContents = [
-            ...this.currentState.contents,
-            { content: modalContent, backGroundColor },
-        ];
-        const newState = { isOpen: true, contents: newContents };
-        this.currentState = newState;
-        this.subscribers.forEach((callback) => callback(newState));
+        try {
+            const newContents = [
+                ...this.currentState.contents,
+                { content: modalContent, backGroundColor },
+            ];
+            this.updateState({ isOpen: true, contents: newContents });
+        } catch (error) {
+            console.error('Failed to open modal:', error);
+        }
     }
 
     closeModal() {
-        const newContents = [...this.currentState.contents];
-        newContents.pop();
-        const newState = { isOpen: newContents.length > 0, contents: newContents };
-        this.currentState = newState;
-        this.subscribers.forEach((callback) => callback(newState));
+        try {
+            const newContents = [...this.currentState.contents];
+            newContents.pop();
+            this.updateState({ isOpen: newContents.length > 0, contents: newContents });
+        } catch (error) {
+            console.error('Failed to close modal:', error);
+        }
     }
 
     closeEntireModal() {
-        const newState = { isOpen: false, contents: [] };
-        this.currentState = newState;
-        this.subscribers.forEach((callback) => callback(newState));
+        try {
+            this.updateState({ isOpen: false, contents: [] });
+        } catch (error) {
+            console.error('Failed to close entire modal:', error);
+        }
     }
 
-    // 현재 모달의 열림 상태 확인
     isModalOpen(): boolean {
         return this.currentState.isOpen;
+    }
+
+    private updateState(newState: ModalState) {
+        this.currentState = newState;
+        this.subscribers.forEach((callback) => callback(newState));
     }
 }

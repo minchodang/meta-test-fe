@@ -12,7 +12,6 @@ export class QuizListService {
 
     private quizList: QuizListItemType[] = [];
 
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
     private constructor() {}
 
     public static getInstance(): QuizListService {

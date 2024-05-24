@@ -5,13 +5,13 @@ import Modal from './Modal';
 import { ModalService, ModalState } from '../../../service/ModalService';
 
 const GlobalModal: React.FC = () => {
+    const modalService = ModalService.getInstance();
     const [isOpen, setIsOpen] = useState(false);
     const [contents, setContents] = useState<
         Array<{ content: ReactNode; backGroundColor?: string }>
     >([]);
-
+    
     useEffect(() => {
-        const modalService = ModalService.getInstance();
         const handleModalChange = ({
             isOpen: isModalOpen,
             contents: modalContents,
