@@ -4,6 +4,7 @@ import Toaster from '@src/components/common/toast/Toast';
 import './globals.css';
 import TanstackQueryProvider from '@src/provider/TanstackQueryProvider';
 import { Metadata } from 'next';
+import Head from 'next/head';
 
 interface LocaleLayoutProps {
     children: React.ReactNode;
@@ -29,13 +30,14 @@ export const metadata: Metadata = {
 
 const LocaleLayout: FC<LocaleLayoutProps> = ({ children }) => (
     <html lang="ko">
-        <head>
+        <Head>
             <link rel="icon" href="meta-favicon.png" sizes="any" />
+            <meta name="google-site-verification" content="E8ZHBmAOyQyZB6ZpMP6wPAjKW69xgQKoW0ChJSRPNiU" />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <meta name="keywords" content="메타인지, 테스트, 인지능력, 자기인식" />
             <meta name="robots" content="index, follow" />
             <meta name="author" content="kode-krew" />
-        </head>
+        </Head>
         <body>
             <TanstackQueryProvider>
                 {children}
