@@ -27,15 +27,16 @@ export const metadata: Metadata = {
         images: ['/home/meta-test-main.png'],
     },
     verification: {
-        google: 'E8ZHBmAOyQyZB6ZpMP6wPAjKW69xgQKoW0ChJSRPNiU',
+        google: 'OZElobdmoSW48omptfIqwZBhuJ9SvoL3w_j6ZD6BWQA',
     },
 };
+
 
 const LocaleLayout: FC<LocaleLayoutProps> = ({ children }) => (
     <html lang="ko">
         <Head>
             <link rel="icon" href="meta-favicon.png" sizes="any" />
-            <meta name="google-site-verification" content="E8ZHBmAOyQyZB6ZpMP6wPAjKW69xgQKoW0ChJSRPNiU" />
+            <meta name="google-site-verification" content="OZElobdmoSW48omptfIqwZBhuJ9SvoL3w_j6ZD6BWQA" />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <meta name="keywords" content="메타인지, 테스트, 인지능력, 자기인식" />
             <meta name="robots" content="index, follow" />
