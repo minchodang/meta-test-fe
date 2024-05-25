@@ -26,6 +26,9 @@ export const metadata: Metadata = {
         description: '당신의 메타인지를 테스트 해 보세요.',
         images: ['/home/meta-test-main.png'],
     },
+    verification: {
+        google: 'E8ZHBmAOyQyZB6ZpMP6wPAjKW69xgQKoW0ChJSRPNiU',
+    },
 };
 
 const LocaleLayout: FC<LocaleLayoutProps> = ({ children }) => (
