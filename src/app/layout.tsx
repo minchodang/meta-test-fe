@@ -28,13 +28,19 @@ export const metadata: Metadata = {
     },
     verification: {
         google: 'E8ZHBmAOyQyZB6ZpMP6wPAjKW69xgQKoW0ChJSRPNiU',
+        other:{
+            "naver-site-verification": '24858e1b15eac669a740295bb91aa95fa8d2d5df'
+        }
     },
 };
+
+
 
 const LocaleLayout: FC<LocaleLayoutProps> = ({ children }) => (
     <html lang="ko">
         <Head>
             <link rel="icon" href="meta-favicon.png" sizes="any" />
+            <meta name="naver-site-verification" content="24858e1b15eac669a740295bb91aa95fa8d2d5df" />
             <meta name="google-site-verification" content="E8ZHBmAOyQyZB6ZpMP6wPAjKW69xgQKoW0ChJSRPNiU" />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <meta name="keywords" content="메타인지, 테스트, 인지능력, 자기인식" />
