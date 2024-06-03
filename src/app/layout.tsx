@@ -18,32 +18,36 @@ export const metadata: Metadata = {
         siteName: 'meta-cognition-test',
         locale: 'ko-kr',
         title: '메타인지 테스트',
-        images: ['/home/meta-test-main.png'],
+        images: ['https://www.meta-cognition.site/home/meta-test-main.png'],
         description: '당신의 메타인지를 테스트 해 보세요.',
     },
     twitter: {
         title: '메타인지 테스트',
         description: '당신의 메타인지를 테스트 해 보세요.',
-        images: ['/home/meta-test-main.png'],
+        images: ['https://www.meta-cognition.site/home/meta-test-main.png'],
     },
     verification: {
         google: 'E8ZHBmAOyQyZB6ZpMP6wPAjKW69xgQKoW0ChJSRPNiU',
-        other:{
-            "naver-site-verification": '24858e1b15eac669a740295bb91aa95fa8d2d5df'
-        }
+        other: {
+            'naver-site-verification': '24858e1b15eac669a740295bb91aa95fa8d2d5df',
+        },
     },
 };
-
-
 
 const LocaleLayout: FC<LocaleLayoutProps> = ({ children }) => (
     <html lang="ko">
         <Head>
-            <link rel="icon" href="meta-favicon.png" sizes="any" />
-            <meta name="naver-site-verification" content="24858e1b15eac669a740295bb91aa95fa8d2d5df" />
-            <meta name="google-site-verification" content="E8ZHBmAOyQyZB6ZpMP6wPAjKW69xgQKoW0ChJSRPNiU" />
+            <link rel="icon" href="/meta-favicon.png" sizes="any" />
+            <meta
+                name="naver-site-verification"
+                content="24858e1b15eac669a740295bb91aa95fa8d2d5df"
+            />
+            <meta
+                name="google-site-verification"
+                content="E8ZHBmAOyQyZB6ZpMP6wPAjKW69xgQKoW0ChJSRPNiU"
+            />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
-            <meta name="keywords" content="메타인지, 테스트, 인지능력, 자기인식" />
+            <meta name="keywords" content="메타인지,메타 테스트, 테스트, 인지능력, 자기인식" />
             <meta name="robots" content="index, follow" />
             <meta name="author" content="kode-krew" />
         </Head>
