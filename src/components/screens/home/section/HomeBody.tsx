@@ -12,7 +12,7 @@ const HomeBody: FC<HomeBodyProps> = () => (
         <div className="w-full">
             <div className="relative w-screen">
                 <Image src={MetaMainImage} loading="eager" alt="메타 테스트 이미지" priority />
-                <div className="absolute bottom-5 w-screen sm:bottom-10 md:bottom-20">
+                <div className="absolute bottom-0 w-screen sm:bottom-10 md:bottom-20">
                     <MainPageTitleBox />
                 </div>
             </div>
