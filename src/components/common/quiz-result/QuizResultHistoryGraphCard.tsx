@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, useMemo, useState } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 import { API_GET_USER_PROFILE, getUserProfile } from '@src/api/getUserProfile';
 import { API_GET_USER_TEST_LIST, getUserTestList } from '@src/api/getUserTestList';
 import SelectBox, { SelectBoxOptionType } from '@src/components/common/SelectBox';
@@ -36,7 +36,7 @@ function isValidTestLevelType(value: unknown): value is QuizTestLevel {
     );
 }
 
-const QuizResultHistoryGraphCard: FC<QuizResultHistoryGraphCardProps> = () => {
+const QuizResultHistoryGraphCard: FC<QuizResultHistoryGraphCardProps> = ({ isLoginSns }) => {
     const [selectedLevel, setSelectedLevel] = useState<QuizTestLevel>('all');
     const { data: userData } = useQuery({
         queryKey: [API_GET_USER_PROFILE],
@@ -61,13 +61,10 @@ const QuizResultHistoryGraphCard: FC<QuizResultHistoryGraphCardProps> = () => {
         staleTime: 0,
     });
     const modalService = ModalService.getInstance();
-    const [token] = useCookies(['refreshToken']);
 
     const onClickLoginButton = () => {
         modalService.openModal(<HomeLoginModalScreen />);
     };
-
-    const isLogin = useMemo(() => !!token, [token]);
 
     const onObserve = () => {
         if (hasNextPage) fetchNextPage();
@@ -75,7 +72,7 @@ const QuizResultHistoryGraphCard: FC<QuizResultHistoryGraphCardProps> = () => {
 
     return (
         <section className="relative mt-3 w-full rounded-md border border-none p-5 shadow-md">
-            {!isLogin ? (
+            {!isLoginSns ? (
                 <div className="absolute inset-0 z-20 flex items-center justify-center bg-white/50 backdrop-blur-sm">
                     <button
                         onClick={onClickLoginButton}
@@ -85,7 +82,7 @@ const QuizResultHistoryGraphCard: FC<QuizResultHistoryGraphCardProps> = () => {
                     </button>
                 </div>
             ) : null}
-            <div className={`${isLogin ? '' : 'pointer-events-none opacity-50'}`}>
+            <div className={`${isLoginSns ? '' : 'pointer-events-none opacity-50'}`}>
                 <article className="flex w-full justify-between">
                     <h3 className="w-full">테스트 점수 기록</h3>
                     <div className="w-36">
