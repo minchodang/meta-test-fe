@@ -78,7 +78,6 @@ export async function PUT(request: NextRequest) {
 export async function DELETE(request: NextRequest) {
     const refreshToken = cookies().get('rtk')?.value;
     const accessToken = cookies().get('atk')?.value;
-    console.log(accessToken, '어 뜨잖아?');
 
     if (!refreshToken) {
         return NextResponse.json({ error: 'Not authenticated' }, { status: 401 });

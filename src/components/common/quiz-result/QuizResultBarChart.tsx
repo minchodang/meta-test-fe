@@ -70,7 +70,6 @@ export const QuizResultBarChart: React.FC<QuizResultBarChartProps> = ({ chartDat
         }
     }, [onObserve]);
 
-    console.log(chartData);
     return (
         <div className="flex h-80 w-full">
             <div

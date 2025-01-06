@@ -6,5 +6,3 @@ const client = createClient<paths>({
 });
 
 const { data, response } = await client.GET('/users');
-
-console.log(data, 'data');

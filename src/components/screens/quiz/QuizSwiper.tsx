@@ -15,8 +15,8 @@ interface QuizSwiperProps {
 const QuizSwiper: FC<QuizSwiperProps> = ({ count }) => {
     const quizListService = QuizListService.getInstance();
     const { replace } = useRouter();
-    const { get } = useSearchParams();
-    const difficulty = get('difficulty') as QuizTestLevel;
+    const searchParams = useSearchParams();
+    const difficulty = searchParams.get('difficulty') as QuizTestLevel;
 
     const quizList = getRandomQuizList({ difficulty });
 
