@@ -29,7 +29,7 @@ const toastService = ToastService.getInstance();
 const processSocialLogin = async ({ code, socialType, loginPath }: SocialLoginRequestParameter) => {
     try {
         const { data } = await axios.post(
-            `${process.env.NEXT_PUBLIC_MATE_TEST_WEB_HOST_URL}/api/social-login`,
+            `${process.env.NEXT_PUBLIC_META_TEST_WEB_HOST_URL}/api/social-login`,
             {
                 code,
                 socialType,
